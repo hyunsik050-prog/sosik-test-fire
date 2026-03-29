@@ -101,6 +101,19 @@ const purposeSelect = document.getElementById("purpose");
 const weatherBtns = document.querySelectorAll(".weather-btn");
 const recommendBtn = document.getElementById("recommend-btn");
 const resultsContainer = document.getElementById("results");
+const themeBtn = document.getElementById("theme-btn");
+
+// Theme Toggle
+themeBtn.addEventListener("click", () => {
+  const currentTheme = document.body.getAttribute("data-theme");
+  if (currentTheme === "dark") {
+    document.body.removeAttribute("data-theme");
+    themeBtn.textContent = "🌓";
+  } else {
+    document.body.setAttribute("data-theme", "dark");
+    themeBtn.textContent = "☀️";
+  }
+});
 
 // Event Listeners
 weatherBtns.forEach(btn => {
