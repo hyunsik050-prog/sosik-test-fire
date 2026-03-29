@@ -103,17 +103,35 @@ const recommendBtn = document.getElementById("recommend-btn");
 const resultsContainer = document.getElementById("results");
 const themeBtn = document.getElementById("theme-btn");
 
-// Theme Toggle
-themeBtn.addEventListener("click", () => {
-  const currentTheme = document.body.getAttribute("data-theme");
-  if (currentTheme === "dark") {
+// Theme Toggle Logic
+const initTheme = () => {
+  const savedTheme = localStorage.getItem("theme");
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  const theme = savedTheme || systemTheme;
+  
+  if (theme === "dark") {
+    document.body.setAttribute("data-theme", "dark");
+    themeBtn.textContent = "☀️";
+  } else {
     document.body.removeAttribute("data-theme");
-    themeBtn.textContent = "🌓";
+    themeBtn.textContent = "🌙";
+  }
+};
+
+themeBtn.addEventListener("click", () => {
+  const isDark = document.body.hasAttribute("data-theme");
+  if (isDark) {
+    document.body.removeAttribute("data-theme");
+    themeBtn.textContent = "🌙";
+    localStorage.setItem("theme", "light");
   } else {
     document.body.setAttribute("data-theme", "dark");
     themeBtn.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
   }
 });
+
+initTheme();
 
 // Event Listeners
 weatherBtns.forEach(btn => {
