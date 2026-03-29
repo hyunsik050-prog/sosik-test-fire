@@ -191,4 +191,3 @@ function displayResults(items) {
     `;
     resultsContainer.appendChild(card);
   });
-}
